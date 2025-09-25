@@ -1,0 +1,62 @@
+Create an SSH key on your computer and upload the public key to GitHub
+
+1. Check if you already have an SSH key
+Open your terminal and run:
+
+ls -al ~/.ssh
+
+
+If you see files like id_rsa and id_rsa.pub, you already have a key.
+
+2. Create a new SSH key
+Run this command:
+
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+
+-t rsa → type of key (RSA)
+
+-b 4096 → key size (4096 bits)
+
+-C "your_email@example.com" → adds a label (usually your email)
+
+Press Enter to save it in the default location.
+You’ll also be asked if you want a password (passphrase).
+
+Enter a password for more security (recommended).
+
+Or just press Enter to skip.
+
+3. Add the key to the SSH agent
+This makes sure you don’t need to type the password every time.
+
+eval "$(ssh-agent -s)"
+ssh-add ~/.ssh/id_rsa
+
+
+4. Copy the public key
+Run:
+
+cat ~/.ssh/id_rsa.pub
+
+
+Copy the result and paste it into GitHub → Settings > SSH and GPG keys.
+
+On macOS, you can copy directly to clipboard:
+
+pbcopy < ~/.ssh/id_rsa.pub
+
+
+5. Test the connection
+Run:
+
+ssh -T git@github.com
+
+
+If it works, GitHub will greet you with your username.
+
+⚠️ Important:
+
+Never share your private key (id_rsa).
+
+Only share the public key (id_rsa.pub).
