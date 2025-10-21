@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>this is a <p id="callback"></p>function</p>
+    <h1>Random Joke Generator</h1>
+
+    <p id="joke"></p>
+
+    <button id="new-joke">Get Another Joke</button>
+
+    <script>
+    /* function displayFunc(word){
+            document.getElementById("callback").innerHTML = word;
+        }
+
+        function firstWord(){
+            displayFunc("Hello")
+        }
+
+        function secondWord(){
+            displayFunc("Bye")
+        }
+
+        firstWord();
+        secondWord();
+        firstWord();
+   
+        
+        async function getJoke() {
+            const response = await fetch("https://official-joke-api.appspot.com/random_joke");
+            const data = await response.json();
+            const jokeElement = document.getElementById("joke");
+            
+            jokeElement.textContent = `${data.setup}  ${data.punchline}`;
+        }
+        getJoke();
+
+        document.getElementById("new-joke").addEventListener("click", getJoke); */
+        let p = fetch("https://official-joke-api.appspot.com/random_joke");
+        p.then(
+            (response) =>{
+                console.log("this is the first then part.");
+                //console.log(response.json());
+                //response = undefined;
+                return response.json();
+                
+            }// how can I get the p2 promise here?
+        ).then(
+            (r)=>{
+                console.log("this is the second promise.");    
+                console.log(r);
+            } 
+        ).catch(
+            (error) =>{
+                console.log("this is the error part.");
+                console.log(error);
+            }
+        ).finally(
+            () =>{
+                console.log("this is the finall part.");
+                console.log();
+            }
+        );
+        console.log(p);
+        console.log(typeof(p));
+    </script>
+</body>
+</html>
