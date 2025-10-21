@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country API</title>
+</head>
+<body>
+    
+    <script>
+        function getCountry(){
+            fetch("https://restcountries.com/v3.1/all")
+                .then(response => response.json())
+                .then(data => {
+                    data.slice(0, 10).forEach(country => {
+                        const capital = country.capital ? country.capital[0] : "No capital";
+                        const info = `
+                        🌍 Country: ${country.name.common}
+                        🏛️ Capital: ${capital}
+                        🌐 Region: ${country.region}
+                        👥 Population: ${country.population.toLocaleString()}
+                        🚩 Flag: ${country.flags.png}
+                        -----------------------------`;
+                        console.log(info);
+                    });
+                })
+                .catch(error => console.log("Error:" , error));
+        }
+
+        getCountry();
+    </script>
+</body>
+</html>
