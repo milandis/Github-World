@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doggi</title>
+</head>
+<body>
+    <h1>Hello DOG</h1>
+    <img id="doggi" src="" alt="dog" width="400" height="300">
+    <span id="status"></span>
+    <p><button id="new-dog">🐕</button></p>
+    <script>
+        function getDog(){
+            fetch("https://dog.ceo/api/breeds/image/random")
+                .then(response => response.json())
+                .then(dog =>{
+                    console.log(dog);
+                    const dogElement = document.getElementById("doggi");
+                    const dogStatus= document.getElementById("status");
+                    dogElement.src= `${dog.message}`;
+                    dogStatus.textContent = `${dog.status}`;
+                })
+                .catch(error => console.log("Error:", error));
+        }
+
+        getDog();
+
+        document.getElementById("new-dog").addEventListener("click", getDog);
+    </script>
+</body>
+</html>
