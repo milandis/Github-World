@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advice</title>
+</head>
+<body>
+    <h1>New Advicce</h1>
+    <p id="adi"></p>
+    <p><button id="new-advice">Advice</button></p>
+    <script>
+        function getAdvice(){
+            fetch("https://api.adviceslip.com/advice")
+                .then(response => response.json())
+                .then(data =>{
+                    console.log(data);
+                    const adviceElement = document.getElementById("adi");
+                    adviceElement.textContent = `${data.slip.advice}`;
+                })
+                .catch(error => console.log("Error:", error));
+        }
+
+        getAdvice();
+
+        document.getElementById("new-advice").addEventListener("click", getAdvice);
+    </script>
+</body>
+</html>
